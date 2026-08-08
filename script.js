@@ -82,6 +82,166 @@ async function loadBlogs() {
 
 loadBlogs();
 
+/* ============================================================
+LOAD SINGLE BLOG POST
+============================================================ */
+
+async function loadSingleBlog() {
+
+    // Get slug from URL
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get("slug");
+
+    // If there is no slug, don't run this function
+    if (!slug) return;
+
+    console.log("Loading blog slug:", slug);
+
+    // Get blog elements
+    const blogLoading = document.getElementById("blogLoading");
+    const blogError = document.getElementById("blogError");
+    const blogArticle = document.getElementById("blogArticle");
+
+    const blogCategory = document.getElementById("blogCategory");
+    const blogDate = document.getElementById("blogDate");
+    const blogTitle = document.getElementById("blogTitle");
+    const blogExcerpt = document.getElementById("blogExcerpt");
+    const blogImage = document.getElementById("blogImage");
+    const blogContent = document.getElementById("blogContent");
+
+    try {
+
+        // Fetch the blog from Supabase
+        const { data, error } = await supabaseClient
+            .from("blogs")
+            .select("*")
+            .eq("slug", slug)
+            .eq("published", true)
+            .single();
+
+        // Supabase error
+        if (error) {
+            console.error("Supabase blog error:", error);
+            showBlogError();
+            return;
+        }
+
+        // Blog not found
+        if (!data) {
+            console.error("No blog found for slug:", slug);
+            showBlogError();
+            return;
+        }
+
+        console.log("Blog loaded successfully:", data);
+
+        // Hide loading
+        if (blogLoading) {
+            blogLoading.style.display = "none";
+        }
+
+        // Hide error
+        if (blogError) {
+            blogError.style.display = "none";
+        }
+
+        // Show article
+        if (blogArticle) {
+            blogArticle.style.display = "block";
+        }
+
+        // Category
+        if (blogCategory) {
+            blogCategory.textContent = data.category || "";
+        }
+
+        // Date
+        if (blogDate && data.created_at) {
+            blogDate.textContent = new Date(
+                data.created_at
+            ).toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+            });
+        }
+
+        // Title
+        if (blogTitle) {
+            blogTitle.textContent = data.title || "";
+        }
+
+        // Excerpt
+        if (blogExcerpt) {
+            blogExcerpt.textContent = data.excerpt || "";
+        }
+
+        // Featured image
+        // IMPORTANT:
+        // Your Supabase column is called "image"
+        if (blogImage && data.image) {
+
+            blogImage.src = data.image;
+            blogImage.alt = data.title || "Blog featured image";
+            blogImage.style.display = "block";
+
+        } else if (blogImage) {
+
+            blogImage.style.display = "none";
+
+        }
+
+        // Full article content
+        if (blogContent) {
+            blogContent.innerHTML = data.content || "";
+        }
+
+        // Update browser title
+        document.title =
+            `${data.title} | Dipesh Kumar Yadav`;
+
+        // Update meta description
+        const metaDescription =
+            document.querySelector('meta[name="description"]');
+
+        if (metaDescription) {
+            metaDescription.setAttribute(
+                "content",
+                data.excerpt ||
+                data.title ||
+                "Read technology articles and insights by Dipesh Kumar Yadav."
+            );
+        }
+
+    } catch (error) {
+
+        console.error("Unexpected error loading blog:", error);
+        showBlogError();
+
+    }
+
+
+    // Show error helper
+    function showBlogError() {
+
+        if (blogLoading) {
+            blogLoading.style.display = "none";
+        }
+
+        if (blogArticle) {
+            blogArticle.style.display = "none";
+        }
+
+        if (blogError) {
+            blogError.style.display = "block";
+        }
+
+    }
+}
+
+
+// Run single blog loader
+loadSingleBlog();
 
 /* ============================================================
    MAIN PORTFOLIO SCRIPT
