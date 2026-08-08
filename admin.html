@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Dashboard </title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+  <!-- =========================================================
+       ADMIN APPLICATION
+  ========================================================== -->
+
+  <div class="admin-app">
+
+
+    <!-- =======================================================
+         LOGIN
+    ======================================================== -->
+
+    <section id="loginSection" class="admin-login-page">
+
+      <div class="admin-login-card">
+
+        <div class="admin-login-logo">
+          <span></span> Dipesh Portfolio <span>Site</span>
+        </div>
+
+        <h1>Admin Login</h1>
+
+        <p>
+          Login to manage your blog posts.
+        </p>
+
+
+        <form id="loginForm">
+
+          <div class="admin-form-group">
+
+            <label for="email">
+              Email
+            </label>
+
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+          </div>
+
+
+          <div class="admin-form-group">
+
+            <label for="password">
+              Password
+            </label>
+
+            <input type="password" id="password" placeholder="Enter your password" required>
+
+          </div>
+
+
+          <button type="submit" class="admin-primary-button admin-login-button">
+            Login
+          </button>
+
+
+          <p id="message" class="admin-message"></p>
+
+        </form>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         DASHBOARD
+    ======================================================== -->
+
+    <section id="dashboardSection" class="admin-dashboard" style="display: none;">
+
+
+      <!-- =====================================================
+           TOP BAR
+      ====================================================== -->
+
+      <header class="admin-topbar">
+
+        <div class="admin-brand">
+
+          <a href="index.html">
+            <span>&</span> dipesh<span>.</span>dev
+          </a>
+
+        </div>
+
+
+        <div class="admin-topbar-right">
+
+          <span id="adminEmailDisplay">
+            Admin
+          </span>
+
+          <button id="logoutButton" class="admin-logout-button">
+            Logout
+          </button>
+
+        </div>
+
+      </header>
+
+
+
+      <!-- =====================================================
+           SIDEBAR
+      ====================================================== -->
+
+      <aside class="admin-sidebar">
+
+        <div class="admin-sidebar-heading">
+          MENU
+        </div>
+
+
+        <nav class="admin-nav">
+
+          <button class="admin-nav-item active" data-page="dashboard">
+            <span class="admin-nav-icon">⌂</span>
+            <span>Dashboard</span>
+          </button>
+
+
+          <button class="admin-nav-item" data-page="posts">
+            <span class="admin-nav-icon">▤</span>
+            <span>All Posts</span>
+          </button>
+
+
+          <button class="admin-nav-item" data-page="add-post">
+            <span class="admin-nav-icon">＋</span>
+            <span>Add New</span>
+          </button>
+
+
+          <div class="admin-sidebar-divider"></div>
+
+
+          <a href="index.html" class="admin-nav-link">
+            <span class="admin-nav-icon">↗</span>
+            <span>View Website</span>
+          </a>
+
+        </nav>
+
+      </aside>
+
+
+
+      <!-- =====================================================
+           MAIN CONTENT
+      ====================================================== -->
+
+      <main class="admin-main">
+
+
+        <!-- ===================================================
+             DASHBOARD PAGE
+        ==================================================== -->
+
+        <div id="dashboardPage" class="admin-page-content active">
+
+          <div class="admin-page-title">
+
+            <div>
+
+              <h1>
+                Dashboard
+              </h1>
+
+              <p>
+                Welcome back. Here's an overview of your blog.
+              </p>
+
+            </div>
+
+            <button class="admin-primary-button" data-page-button="add-post">
+              + Add New Blog
+            </button>
+
+          </div>
+
+
+          <!-- Stats -->
+
+          <div class="admin-stats">
+
+            <div class="admin-stat-card">
+
+              <div class="admin-stat-icon">
+                ▤
+              </div>
+
+              <div>
+
+                <span>
+                  Total Posts
+                </span>
+
+                <strong id="totalPosts">
+                  0
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+              <div class="admin-stat-icon">
+                ✓
+              </div>
+
+              <div>
+
+                <span>
+                  Published
+                </span>
+
+                <strong id="publishedPosts">
+                  0
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+              <div class="admin-stat-icon">
+                ○
+              </div>
+
+              <div>
+
+                <span>
+                  Drafts
+                </span>
+
+                <strong id="draftPosts">
+                  0
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Recent Posts -->
+
+          <div class="admin-panel">
+
+            <div class="admin-panel-header">
+
+              <div>
+
+                <h2>
+                  Recent Posts
+                </h2>
+
+                <p>
+                  Your latest blog posts
+                </p>
+
+              </div>
+
+              <button class="admin-text-button" data-page-button="posts">
+                View All
+              </button>
+
+            </div>
+
+
+            <div id="recentPosts">
+
+              <div class="admin-empty">
+                Loading posts...
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ===================================================
+             ALL POSTS PAGE
+        ==================================================== -->
+
+        <div id="postsPage" class="admin-page-content">
+
+          <div class="admin-page-title">
+
+            <div>
+
+              <h1>
+                All Posts
+              </h1>
+
+              <p>
+                Manage all your blog posts.
+              </p>
+
+            </div>
+
+            <button class="admin-primary-button" data-page-button="add-post">
+              + Add New Blog
+            </button>
+
+          </div>
+
+
+          <div class="admin-panel">
+
+            <div class="admin-panel-header">
+
+              <div>
+
+                <h2>
+                  Blog Posts
+                </h2>
+
+              </div>
+
+              <button id="refreshPosts" class="admin-secondary-button">
+                Refresh
+              </button>
+
+            </div>
+
+
+            <div id="allPosts">
+
+              <div class="admin-empty">
+                Loading posts...
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ===================================================
+             ADD / EDIT BLOG PAGE
+        ==================================================== -->
+
+        <div id="addPostPage" class="admin-page-content">
+
+          <div class="admin-page-title">
+
+            <div>
+
+              <h1 id="addPostHeading">
+                Add New Blog
+              </h1>
+
+              <p id="addPostSubheading">
+                Create a new blog post.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <form id="blogForm">
+
+
+            <!-- Main editor -->
+
+            <div class="admin-editor-layout">
+
+
+              <!-- Left -->
+
+              <div class="admin-editor-main">
+
+                <div class="admin-panel">
+
+                  <div class="admin-form-group">
+
+                    <label for="blogTitle">
+                      Title
+                    </label>
+
+                    <input type="text" id="blogTitle" class="admin-large-input" placeholder="Enter your blog title..."
+                      required>
+
+                  </div>
+
+
+                  <div class="admin-form-group">
+
+                    <label for="blogContent">
+                      Content
+                    </label>
+
+                    <textarea id="blogContent" class="admin-content-editor"
+                      placeholder="Write your blog content here..." required></textarea>
+
+                    <small class="admin-help">
+                      You can use HTML tags such as
+                      &lt;h2&gt;, &lt;p&gt;, &lt;ul&gt;,
+                      &lt;strong&gt;, etc.
+                    </small>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- Right -->
+
+              <div class="admin-editor-sidebar">
+
+
+                <!-- Publish -->
+
+                <div class="admin-panel">
+
+                  <div class="admin-panel-title">
+                    Publish
+                  </div>
+
+
+                  <div class="admin-publish-status">
+
+                    <span>
+                      Status
+                    </span>
+
+                    <strong id="publishStatus">
+                      Published
+                    </strong>
+
+                  </div>
+
+
+                  <label class="admin-checkbox">
+
+                    <input type="checkbox" id="blogPublished" checked>
+
+                    <span>
+                      Publish this post
+                    </span>
+
+                  </label>
+
+
+                  <button type="submit" id="blogSubmitButton" class="admin-primary-button admin-publish-button">
+                    Publish Blog
+                  </button>
+
+
+                  <button type="button" id="cancelEditButton" class="admin-secondary-button" style="display: none; width: 100%; margin-top: 10px;">
+                    Cancel Edit
+                  </button>
+
+
+                  <p id="blogMessage" class="admin-message"></p>
+
+                </div>
+
+
+
+                <!-- Blog details -->
+
+                <div class="admin-panel">
+
+                  <div class="admin-panel-title">
+                    Blog Details
+                  </div>
+
+
+                  <div class="admin-form-group">
+
+                    <label for="blogSlug">
+                      Slug
+                    </label>
+
+                    <input type="text" id="blogSlug" placeholder="my-blog-post" required>
+
+                    <small class="admin-help">
+                      Example:
+                      getting-started-with-riverpod
+                    </small>
+
+                  </div>
+
+
+                  <div class="admin-form-group">
+
+                    <label for="blogCategory">
+                      Category
+                    </label>
+
+                    <input type="text" id="blogCategory" placeholder="Tutorial" required>
+
+                  </div>
+
+
+                  <div class="admin-form-group">
+
+                    <label for="blogExcerpt">
+                      Excerpt
+                    </label>
+
+                    <textarea id="blogExcerpt" rows="5" placeholder="Short description of your blog..."></textarea>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+
+
+      </main>
+
+    </section>
+
+  </div>
+
+
+
+  <!-- =========================================================
+       SUPABASE
+  ========================================================== -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+  <script>
+
+    /* =========================================================
+       SUPABASE CONFIG
+    ========================================================= */
+
+    const SUPABASE_URL =
+      "https://fdcusagqytiatvetgldt.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_CBA8NPW4B34h0RR96WDoIw_eSsjMV94";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+
+    /* =========================================================
+       ELEMENTS
+    ========================================================= */
+
+    const loginSection =
+      document.getElementById(
+        "loginSection"
+      );
+
+    const dashboardSection =
+      document.getElementById(
+        "dashboardSection"
+      );
+
+    const loginForm =
+      document.getElementById(
+        "loginForm"
+      );
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+    const logoutButton =
+      document.getElementById(
+        "logoutButton"
+      );
+
+    const adminEmailDisplay =
+      document.getElementById(
+        "adminEmailDisplay"
+      );
+
+
+
+    /* =========================================================
+       LOGIN
+    ========================================================= */
+
+    loginForm.addEventListener(
+      "submit",
+      async function (event) {
+
+        event.preventDefault();
+
+
+        const email =
+          document.getElementById(
+            "email"
+          ).value.trim();
+
+
+        const password =
+          document.getElementById(
+            "password"
+          ).value;
+
+
+        message.textContent =
+          "Logging in...";
+
+
+        message.className =
+          "admin-message";
+
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth
+            .signInWithPassword({
+
+              email: email,
+
+              password: password
+
+            });
+
+
+        if (error) {
+
+          console.error(error);
+
+
+          message.textContent =
+            "Login failed: " +
+            error.message;
+
+
+          message.className =
+            "admin-message error";
+
+
+          return;
+
+        }
+
+
+        showDashboard(
+          data.user
+        );
+
+      }
+    );
+
+
+
+    /* =========================================================
+       CHECK EXISTING SESSION
+    ========================================================= */
+
+    async function checkSession() {
+
+      const {
+        data: {
+          user
+        }
+      } =
+        await supabaseClient.auth
+          .getUser();
+
+
+      if (user) {
+
+        showDashboard(user);
+
+      }
+
+    }
+
+
+
+    /* =========================================================
+       SHOW DASHBOARD
+    ========================================================= */
+
+    async function showDashboard(user) {
+
+      console.log("LOGGED IN USER:", user);
+
+      loginSection.style.display = "none";
+
+      dashboardSection.style.display = "block";
+
+      if (user && user.email) {
+        adminEmailDisplay.textContent = user.email;
+      }
+
+      loadBlogs();
+    }
+
+
+
+    /* =========================================================
+       LOGOUT
+    ========================================================= */
+
+    logoutButton.addEventListener(
+      "click",
+      async function () {
+
+        await supabaseClient.auth.signOut();
+
+
+        dashboardSection.style.display =
+          "none";
+
+
+        loginSection.style.display =
+          "flex";
+
+
+        loginForm.reset();
+
+
+        message.textContent = "";
+
+      }
+    );
+
+
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
+    const navItems =
+      document.querySelectorAll(
+        ".admin-nav-item"
+      );
+
+
+    const pageButtons =
+      document.querySelectorAll(
+        "[data-page-button]"
+      );
+
+
+    const pages = {
+
+      dashboard:
+        document.getElementById(
+          "dashboardPage"
+        ),
+
+      posts:
+        document.getElementById(
+          "postsPage"
+        ),
+
+      "add-post":
+        document.getElementById(
+          "addPostPage"
+        )
+
+    };
+
+
+    function showPage(pageName) {
+
+      Object.values(pages)
+        .forEach(function (page) {
+
+          page.classList.remove(
+            "active"
+          );
+
+        });
+
+
+      if (pages[pageName]) {
+
+        pages[pageName]
+          .classList.add("active");
+
+      }
+
+
+      navItems.forEach(
+        function (item) {
+
+          item.classList.toggle(
+            "active",
+            item.dataset.page === pageName
+          );
+
+        }
+      );
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* Going to "Add New" from the sidebar or the "+ Add New Blog"
+       buttons should always start a fresh (non-edit) form. Only
+       the Edit button on a post row should open the form pre-filled. */
+
+    navItems.forEach(
+      function (item) {
+
+        item.addEventListener(
+          "click",
+          function () {
+
+            if (item.dataset.page === "add-post") {
+              resetBlogForm();
+            }
+
+            showPage(
+              item.dataset.page
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+    pageButtons.forEach(
+      function (button) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            if (button.dataset.pageButton === "add-post") {
+              resetBlogForm();
+            }
+
+            showPage(
+              button.dataset.pageButton
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+
+    /* =========================================================
+       BLOG FORM (ADD + EDIT)
+    ========================================================= */
+
+    const blogForm =
+      document.getElementById(
+        "blogForm"
+      );
+
+
+    const blogMessage =
+      document.getElementById(
+        "blogMessage"
+      );
+
+
+    const blogSubmitButton =
+      document.getElementById(
+        "blogSubmitButton"
+      );
+
+
+    const cancelEditButton =
+      document.getElementById(
+        "cancelEditButton"
+      );
+
+
+    /* Holds the id of the blog currently being edited.
+       null means the form is in "add new" mode. */
+
+    let editingBlogId = null;
+
+
+    function resetBlogForm() {
+
+      editingBlogId = null;
+
+      blogForm.reset();
+
+      document.getElementById(
+        "blogPublished"
+      ).checked = true;
+
+      document.getElementById(
+        "publishStatus"
+      ).textContent = "Published";
+
+      document.getElementById(
+        "blogSlug"
+      ).dataset.manual = "";
+
+      document.getElementById(
+        "addPostHeading"
+      ).textContent = "Add New Blog";
+
+      document.getElementById(
+        "addPostSubheading"
+      ).textContent = "Create a new blog post.";
+
+      blogSubmitButton.textContent =
+        "Publish Blog";
+
+      cancelEditButton.style.display =
+        "none";
+
+      blogMessage.textContent = "";
+
+      blogMessage.className =
+        "admin-message";
+
+    }
+
+
+    cancelEditButton.addEventListener(
+      "click",
+      function () {
+
+        resetBlogForm();
+
+        showPage("posts");
+
+      }
+    );
+
+
+    blogForm.addEventListener(
+      "submit",
+      async function (event) {
+
+        event.preventDefault();
+
+
+        const title =
+          document.getElementById(
+            "blogTitle"
+          ).value.trim();
+
+
+        const slug =
+          document.getElementById(
+            "blogSlug"
+          ).value.trim();
+
+
+        const category =
+          document.getElementById(
+            "blogCategory"
+          ).value.trim();
+
+
+        const excerpt =
+          document.getElementById(
+            "blogExcerpt"
+          ).value.trim();
+
+
+        const content =
+          document.getElementById(
+            "blogContent"
+          ).value.trim();
+
+
+        const published =
+          document.getElementById(
+            "blogPublished"
+          ).checked;
+
+
+        const isEditing =
+          !!editingBlogId;
+
+
+        blogMessage.textContent =
+          isEditing
+            ? "Updating..."
+            : "Publishing...";
+
+
+        blogMessage.className =
+          "admin-message";
+
+
+        const payload = {
+
+          title: title,
+
+          slug: slug,
+
+          category: category,
+
+          excerpt: excerpt,
+
+          content: content,
+
+          published: published
+
+        };
+
+
+        const {
+          data,
+          error
+        } =
+          isEditing
+            ? await supabaseClient
+              .from("blogs")
+              .update(payload)
+              .eq("id", editingBlogId)
+              .select()
+            : await supabaseClient
+              .from("blogs")
+              .insert([payload])
+              .select();
+
+
+        if (error) {
+
+          console.error(error);
+
+
+          blogMessage.textContent =
+            "Error: " +
+            error.message;
+
+
+          blogMessage.className =
+            "admin-message error";
+
+
+          return;
+
+        }
+
+
+        /* Supabase does NOT return an error when Row Level
+           Security blocks an UPDATE — it just matches zero
+           rows. If that happens, data comes back as an empty
+           array even though there was no "error". Catch that
+           here instead of reporting a false success. */
+
+        if (!data || data.length === 0) {
+
+          console.error(
+            "Update/insert returned no rows — likely blocked by RLS.",
+            { isEditing: isEditing, id: editingBlogId }
+          );
+
+
+          blogMessage.textContent =
+            isEditing
+              ? "Nothing was updated. Your account may not have permission to edit posts (check RLS policies for UPDATE on the blogs table)."
+              : "The post wasn't saved. Your account may not have permission to insert posts (check RLS policies on the blogs table).";
+
+
+          blogMessage.className =
+            "admin-message error";
+
+
+          return;
+
+        }
+
+
+        blogMessage.textContent =
+          isEditing
+            ? "Blog updated successfully!"
+            : "Blog published successfully!";
+
+
+        blogMessage.className =
+          "admin-message success";
+
+
+        await loadBlogs();
+
+
+        setTimeout(
+          function () {
+
+            resetBlogForm();
+
+            showPage("posts");
+
+          },
+          700
+        );
+
+      }
+    );
+
+
+
+    /* =========================================================
+       LOAD BLOGS
+    ========================================================= */
+
+    let allBlogs = [];
+
+
+    async function loadBlogs() {
+
+      const recentPosts =
+        document.getElementById(
+          "recentPosts"
+        );
+
+
+      const allPosts =
+        document.getElementById(
+          "allPosts"
+        );
+
+
+      recentPosts.innerHTML =
+        '<div class="admin-empty">Loading posts...</div>';
+
+
+      allPosts.innerHTML =
+        '<div class="admin-empty">Loading posts...</div>';
+
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from("blogs")
+          .select("*")
+          .order(
+            "created_at",
+            {
+              ascending: false
+            }
+          );
+
+
+      if (error) {
+
+        console.error(error);
+
+
+        recentPosts.innerHTML =
+          '<div class="admin-empty admin-error-text">Unable to load posts.</div>';
+
+
+        allPosts.innerHTML =
+          '<div class="admin-empty admin-error-text">Unable to load posts.</div>';
+
+
+        return;
+
+      }
+
+
+      allBlogs =
+        data || [];
+
+
+      updateStats(
+        allBlogs
+      );
+
+
+      renderRecentPosts(
+        allBlogs
+      );
+
+
+      renderAllPosts(
+        allBlogs
+      );
+
+    }
+
+
+
+    /* =========================================================
+       STATS
+    ========================================================= */
+
+    function updateStats(blogs) {
+
+      const total =
+        blogs.length;
+
+
+      const published =
+        blogs.filter(
+          function (blog) {
+
+            return blog.published === true;
+
+          }
+        ).length;
+
+
+      const drafts =
+        total - published;
+
+
+      document.getElementById(
+        "totalPosts"
+      ).textContent =
+        total;
+
+
+      document.getElementById(
+        "publishedPosts"
+      ).textContent =
+        published;
+
+
+      document.getElementById(
+        "draftPosts"
+      ).textContent =
+        drafts;
+
+    }
+
+
+
+    /* =========================================================
+       RECENT POSTS
+    ========================================================= */
+
+    function renderRecentPosts(
+      blogs
+    ) {
+
+      const container =
+        document.getElementById(
+          "recentPosts"
+        );
+
+
+      const recent =
+        blogs.slice(0, 5);
+
+
+      if (recent.length === 0) {
+
+        container.innerHTML =
+          '<div class="admin-empty">No blog posts yet.</div>';
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        recent.map(
+          function (blog) {
+
+            return createBlogRow(
+              blog,
+              false
+            );
+
+          }
+        ).join("");
+
+    }
+
+
+
+    /* =========================================================
+       ALL POSTS
+    ========================================================= */
+
+    function renderAllPosts(
+      blogs
+    ) {
+
+      const container =
+        document.getElementById(
+          "allPosts"
+        );
+
+
+      if (blogs.length === 0) {
+
+        container.innerHTML =
+          '<div class="admin-empty">No blog posts yet.</div>';
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        blogs.map(
+          function (blog) {
+
+            return createBlogRow(
+              blog,
+              true
+            );
+
+          }
+        ).join("");
+
+    }
+
+
+
+    /* =========================================================
+       BLOG ROW
+    ========================================================= */
+
+    function createBlogRow(
+      blog,
+      showDelete
+    ) {
+
+      const date =
+        blog.created_at
+          ? new Date(
+            blog.created_at
+          ).toLocaleDateString(
+            "en-US",
+            {
+              month: "short",
+              day: "numeric",
+              year: "numeric"
+            }
+          )
+          : "";
+
+
+      const status =
+        blog.published
+          ? "Published"
+          : "Draft";
+
+
+      return `
+
+        <div class="admin-post-row">
+
+          <div class="admin-post-info">
+
+            <h3>
+              ${escapeHTML(
+        blog.title
+      )}
+            </h3>
+
+            <div class="admin-post-meta">
+
+              <span>
+                ${escapeHTML(
+        blog.category || "Uncategorized"
+      )}
+              </span>
+
+              <span>
+                ${status}
+              </span>
+
+              <span>
+                ${date}
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="admin-post-actions">
+
+            <a
+              href="blog.html?slug=${encodeURIComponent(
+        blog.slug
+      )}"
+              target="_blank"
+              class="admin-view-button"
+            >
+              View
+            </a>
+
+
+            <button
+              type="button"
+              class="admin-view-button"
+              onclick="editBlog('${blog.id}')"
+            >
+              Edit
+            </button>
+
+
+            ${showDelete
+          ? `
+                <button
+                  class="admin-delete-button"
+                  onclick="deleteBlog('${blog.id}')"
+                >
+                  Delete
+                </button>
+              `
+          : ""
+        }
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+
+    /* =========================================================
+       EDIT BLOG
+    ========================================================= */
+
+    window.editBlog =
+      function (id) {
+
+        const blog =
+          allBlogs.find(
+            function (b) {
+
+              return String(b.id) === String(id);
+
+            }
+          );
+
+
+        if (!blog) {
+
+          alert(
+            "Could not find that blog post."
+          );
+
+          return;
+
+        }
+
+
+        editingBlogId =
+          blog.id;
+
+
+        document.getElementById(
+          "blogTitle"
+        ).value =
+          blog.title || "";
+
+
+        document.getElementById(
+          "blogSlug"
+        ).value =
+          blog.slug || "";
+
+
+        /* Mark the slug as manually set so the auto-slug
+           listener doesn't overwrite it while editing. */
+
+        document.getElementById(
+          "blogSlug"
+        ).dataset.manual =
+          "true";
+
+
+        document.getElementById(
+          "blogCategory"
+        ).value =
+          blog.category || "";
+
+
+        document.getElementById(
+          "blogExcerpt"
+        ).value =
+          blog.excerpt || "";
+
+
+        document.getElementById(
+          "blogContent"
+        ).value =
+          blog.content || "";
+
+
+        document.getElementById(
+          "blogPublished"
+        ).checked =
+          blog.published === true;
+
+
+        document.getElementById(
+          "publishStatus"
+        ).textContent =
+          blog.published
+            ? "Published"
+            : "Draft";
+
+
+        document.getElementById(
+          "addPostHeading"
+        ).textContent =
+          "Edit Blog";
+
+
+        document.getElementById(
+          "addPostSubheading"
+        ).textContent =
+          "Update your existing blog post.";
+
+
+        blogSubmitButton.textContent =
+          "Update Blog";
+
+
+        cancelEditButton.style.display =
+          "block";
+
+
+        blogMessage.textContent =
+          "";
+
+
+        blogMessage.className =
+          "admin-message";
+
+
+        showPage("add-post");
+
+      };
+
+
+
+    /* =========================================================
+       DELETE BLOG
+    ========================================================= */
+
+    window.deleteBlog =
+      async function (id) {
+
+        const confirmed =
+          confirm(
+            "Are you sure you want to delete this blog?"
+          );
+
+
+        if (!confirmed) {
+
+          return;
+
+        }
+
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("blogs")
+            .delete()
+            .eq(
+              "id",
+              id
+            )
+            .select();
+
+
+        if (error) {
+
+          alert(
+            "Unable to delete blog: " +
+            error.message
+          );
+
+          return;
+
+        }
+
+
+        /* Supabase does NOT return an error when Row Level
+           Security blocks a DELETE — it just matches zero
+           rows, so "error" stays null even though nothing was
+           deleted. Requesting .select() lets us see that the
+           returned array is empty and warn instead of silently
+           doing nothing. */
+
+        if (!data || data.length === 0) {
+
+          console.error(
+            "Delete returned no rows — likely blocked by RLS.",
+            { id: id }
+          );
+
+
+          alert(
+            "The post wasn't deleted. Your account may not have permission to delete posts — check the RLS DELETE policy on the blogs table."
+          );
+
+          return;
+
+        }
+
+
+        /* If the post being deleted is the one currently
+           open in the editor, back out of edit mode. */
+
+        if (
+          editingBlogId &&
+          String(editingBlogId) === String(id)
+        ) {
+
+          resetBlogForm();
+
+        }
+
+
+        await loadBlogs();
+
+      };
+
+
+
+    /* =========================================================
+       REFRESH
+    ========================================================= */
+
+    document
+      .getElementById(
+        "refreshPosts"
+      )
+      .addEventListener(
+        "click",
+        function () {
+
+          loadBlogs();
+
+        }
+      );
+
+
+
+    /* =========================================================
+       AUTO SLUG
+    ========================================================= */
+
+    document
+      .getElementById(
+        "blogTitle"
+      )
+      .addEventListener(
+        "input",
+        function () {
+
+          const slugInput =
+            document.getElementById(
+              "blogSlug"
+            );
+
+
+          if (
+            !slugInput.dataset.manual
+          ) {
+
+            slugInput.value =
+              this.value
+                .toLowerCase()
+                .trim()
+                .replace(
+                  /[^a-z0-9]+/g,
+                  "-"
+                )
+                .replace(
+                  /^-+|-+$/g,
+                  ""
+                );
+
+          }
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "blogSlug"
+      )
+      .addEventListener(
+        "input",
+        function () {
+
+          this.dataset.manual =
+            "true";
+
+        }
+      );
+
+
+
+    /* =========================================================
+       PUBLISH STATUS
+    ========================================================= */
+
+    document
+      .getElementById(
+        "blogPublished"
+      )
+      .addEventListener(
+        "change",
+        function () {
+
+          document.getElementById(
+            "publishStatus"
+          ).textContent =
+            this.checked
+              ? "Published"
+              : "Draft";
+
+        }
+      );
+
+
+
+    /* =========================================================
+       ESCAPE HTML
+    ========================================================= */
+
+    function escapeHTML(
+      value
+    ) {
+
+      if (!value) {
+
+        return "";
+
+      }
+
+
+      return String(value)
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+
+    /* =========================================================
+       START
+    ========================================================= */
+
+    checkSession();
+
+  </script>
+
+</body>
+
+</html>
