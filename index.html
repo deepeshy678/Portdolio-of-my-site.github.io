@@ -1,259 +1,495 @@
 <!DOCTYPE html>
+<html lang="en" data-theme="dark" data-color="fire">
 
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIPESH KUMAR YADAV</title>
-    <link rel="shortcut icon" type="png" href="icon/play.png">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Dipesh Yadav - IT Student & Flutter Developer from Brijung. Portfolio showcasing skills, projects, achievements and blogs." />
+  <title>Dipesh Yadav | Flutter Developer</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128293;</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
-    <div class="scroll-up-btn">
-        <i class="fas fa-angle-up"></i>
-    </div>
-    <nav class="navbar">
-        <div class="max-width">
-            <div class="logo"><a href="#">Wel<span>Come!</span></a></div>
-            <ul class="menu">
-                <li><a href="#home" class="menu-btn">Home</a></li>
-                <li><a href="#about" class="menu-btn">About</a></li>
-                <li><a href="#services" class="menu-btn">Services</a></li>
-                <li><a href="#skills" class="menu-btn">Skills</a></li>
-                <li><a href="#teams" class="menu-btn">Teams</a></li>
-                <li><a href="#contact" class="menu-btn">Social</a></li>
-            </ul>
-            <div class="menu-btn">
-                <i class="fas fa-bars"></i>
-            </div>
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-flame"></div>
+    <span>DY</span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <nav class="nav container">
+      <a href="#home" class="logo"><span class="logo-flame"></span> Dipesh <span class="logo-dot"></span></a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#blog" class="nav-link">Blog</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-tools">
+        <!-- Theme switcher (light / dark) -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
+          <span class="icon-sun">&#9728;</span>
+          <span class="icon-moon">&#9790;</span>
+          <span class="toggle-thumb"></span>
+        </button>
+
+        <!-- Color palette dropdown -->
+        <div class="color-picker" id="colorPicker">
+          <button class="color-picker-btn" id="colorPickerBtn" aria-label="Change accent color">
+            <span class="color-drop"></span>
+          </button>
+          <div class="color-menu" id="colorMenu">
+            <span class="color-menu-title">Accent Color</span>
+            <button class="color-swatch" data-color="fire" style="--swatch:#ff3d2e" title="Fiery Red"></button>
+            <button class="color-swatch" data-color="rose" style="--swatch:#ff4d88" title="Rose"></button>
+            <button class="color-swatch" data-color="blue" style="--swatch:#3d7bff" title="Blue"></button>
+            <button class="color-swatch" data-color="forest" style="--swatch:#2ec98a" title="Forest"></button>
+            <button class="color-swatch" data-color="violet" style="--swatch:#9b5cff" title="Violet"></button>
+            <button class="color-swatch" data-color="amber" style="--swatch:#ffa03d" title="Amber"></button>
+          </div>
         </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </nav>
+  </header>
 
-    <!-- home section start -->
-    <section class="home" id="home">
-        <div class="max-width">
-            <div class="home-content">
-                <div class="text-1">Hello, My name is</div>
-                <div class="text-2">Dipesh Kumar Yadav</div>
-                <div class="text-3">And I'm a <span class="typing"></span></div>
-                <a href="https://wa.me/9816217614">Contact me</a>
-            </div>
+  <main>
+    <!-- ============ HOME ============ -->
+    <section class="home section" id="home">
+      <div class="container home-grid">
+        <div class="home-text reveal">
+          <p class="home-greeting"><span class="wave">&#128075;</span> Hello, I am</p>
+          <h1 class="home-name">Dipesh <span class="accent">Yadav</span></h1>
+          <h2 class="home-role"><span class="typewriter" id="typewriter"></span><span class="cursor">|</span></h2>
+          <p class="home-desc">
+            Build apps in <strong>Flutter</strong> & passionate <strong>Flutter developer</strong>
+            building clean, fast and delightful cross-platform apps with love and hot coffee.
+          </p>
+          <div class="home-actions">
+            <a href="https://wa.me/9816217614" class="btn btn-primary">Chat </a>
+            <a href="#projects" class="btn btn-outline">View Projects</a>
+          </div>
+          <div class="home-socials">
+            <a href="https://github.com/deepeshy2895" aria-label="GitHub" title="GitHub"><span class="social-icon gh"></span></a>
+            <a href="https://www.linkedin.com/in/dipesh-kumar-yadav-2861482b5/" aria-label="LinkedIn" title="LinkedIn"><span class="social-icon li"></span></a>
+          </div>
         </div>
+
+        <div class="home-visual reveal">
+          <div class="avatar-frame">
+            <div class="avatar-ring"></div>
+           <img src="images/profile.jpeg" alt="Dipesh Yadav" class="avatar-photo">
+            <div class="floating-chip chip-flutter">Flutter</div>
+            <div class="floating-chip chip-dart">Dart</div>
+            <div class="floating-chip chip-fire">Firebase</div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true"><span></span></div>
     </section>
 
-    <!-- about section start -->
-    <section class="about" id="about">
-        <div class="max-width">
-            <h2 class="title">About me</h2>
-            <div class="about-content">
-                <div class="column left">
-                    <img src="bio.gif" alt="">
-                </div>
-                <div class="column right">
-                    <div class="text">I'm Dipesh and I'm a <span class="typing-2"></span></div>
-                    <p>Myself Dipesh Kumar Yadav and i am currently a learner. My greatest passion is in life using my technicals know-how to benifit other people or organizations.I am eager to be challenged in order to grow and further improve my IT skills.I am a healthy guy with sound mind and physique.I am committed to continious learning proffesional development to stay current in the latest trends and technologies.Feel delightful when playing games,listening songs,reading novels and magazines,travelling different places and the list goes on.Mostly i am involving in learning new skills which helps to enhance my technical background.</p>
-                    <a href="https://drive.google.com/file/d/1pEhAyLo8QCyJ5wh0L_mbmIPqkZIDZHcE/view?usp=sharing">Download CV</a>
-                </div>
-            </div>
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-tag">Who I am</span>
+          <h2 class="section-title">About <span class="accent">Me</span></h2>
+          <p class="section-sub">A quick look at my story</p>
         </div>
+
+        <div class="about-grid">
+          <div class="about-card reveal">
+            <div class="about-quote">"</div>
+            <p class="about-text">
+              I’m <strong>Dipesh Kumar Yadav</strong>, passionate about technology, design, and digital creativity. My skills
+              include <strong>Flutter & Dart development, UI/UX Design, Graphic Designing, and Digital
+                Marketing</strong>. I enjoy turning ideas into engaging, user-friendly, and visually appealing digital
+              experiences while continuously learning and exploring new technologies.
+
+            </p>
+            <ul class="about-info">
+              <li><span>Name</span>Dipesh Yadav</li>
+              <li><span>Location</span>Brijung, Nepal</li>
+              <li><span>Education</span>BIM</li>
+              <li><span>Focus</span>Flutter / Mobile Dev</li>
+              <li><span>Email</span>dipeshkmrydv@gmail.com</li>
+            </ul>
+            <a href="#" class="btn btn-outline btn-sm" id="downloadCv">Download CV</a>
+          </div>
+
+          <div class="about-stats reveal">
+            <div class="stat-box">
+              <h3 class="stat-num accent">Flutter</h3>
+              <p>App Development</p>
+            </div>
+            <div class="stat-box">
+              <h3 class="stat-num accent">UI/UX</h3>
+              <p>Design &amp; Prototyping</p>
+            </div>
+            <div class="stat-box">
+              <h3 class="stat-num accent">Digital</h3>
+              <p>Marketing &amp; Branding</p>
+            </div>
+            <div class="stat-box">
+              <h3 class="stat-num accent">Graphic</h3>
+              <p>Design &amp; Prototyping</p>
+            </div>
+            <div class="stat-box">
+              <h3 class="stat-num accent">Website</h3>
+              <p>Development &amp; Design</p>
+            </div>
+            <div class="stat-box">
+    <h3 class="stat-num accent">Tutoring</h3>
+    <p>Education &amp; Mentoring</p>
+  </div>
+          </div>
+
+        </div>
+      </div>
     </section>
 
-    <!-- services section start -->
-    <section class="services" id="services">
-        <div class="max-width">
-            <h2 class="title">My services</h2>
-            <div class="serv-content">
-                <div class="card">
-                    <div class="box">
-                        <i class="fas fa-paint-brush"></i>
-                        <div class="text">Web Design</div>
-                        <p>A good web designer needs to possess a range of skills, including a strong understanding of user experience and interface design, proficiency in coding languages such as HTML, CSS, and JavaScript, and an eye for aesthetics and visual appeal.    </p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <i class="fas fa-chart-line"></i>
-                        <div class="text">Digital Marketing</div>
-                        <p>Digital marketing is a broad term that refers to various techniques and strategies used to promote products, services, or brands. These channels can include search engines, social media, email marketing, display advertising more.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <i class="fas fa-code"></i>
-                        <div class="text">SEO</div>
-                        <p> An SEO expert has a deep understanding of how search engines work, as well as the latest trends for optimizing websites for search engine algorithms. They use a variety of techniques to improve a website's ranking and visibility in search results. </p>
-                    </div>
-                </div>
-               </div>
-            </div>
+    <!-- ============ SKILLS ============ -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-tag">What I know</span>
+          <h2 class="section-title">My <span class="accent">Skills</span></h2>
+          <p class="section-sub">Technologies I use to build things</p>
         </div>
+
+        <div class="skills-grid">
+          <div class="skill-card reveal">
+            <h3 class="skill-cat">Flutter &amp; Mobile</h3>
+            <div class="skill-bar">
+              <span class="skill-label">Flutter / Dart</span><span class="skill-pct">90%</span>
+              <div class="bar">
+                <div class="bar-fill" style="--w:90%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">State Mgmt (Riverpod)</span><span class="skill-pct">80%</span>
+              <div class="bar">
+                <div class="bar-fill" style="--w:80%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Firebase Suite</span><span class="skill-pct">85%</span>
+              <div class="bar">
+                <div class="bar-fill" style="--w:85%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">REST API Integration</span><span class="skill-pct">88%</span>
+              <div class="bar">
+                <div class="bar-fill" style="--w:88%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-card reveal">
+            <h3 class="skill-cat">Web &amp; Backend</h3>
+            <div class="skill-bar">
+              <span class="skill-label">HTML / CSS / JavaScript</span><span class="skill-pct">80%</span>
+              <div class="bar">
+                <div class="bar-fill" style="--w:80%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">React Js / Talwind CSS</span><span class="skill-pct">65%</span>
+              <div class="bar">
+                <div class="bar-fill" style="--w:65%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">MySQL / PostgreSQL</span><span class="skill-pct">70%</span>
+              <div class="bar">
+                <div class="bar-fill" style="--w:70%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Git / GitHub</span><span class="skill-pct">85%</span>
+              <div class="bar">
+                <div class="bar-fill" style="--w:85%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-card reveal">
+            <h3 class="skill-cat">Tools &amp; Soft Skills</h3>
+            <div class="skill-bar">
+              <span class="skill-label">Figma / Canva (UI & Graphics Design)</span><span class="skill-pct">72%</span>
+              <div class="bar">
+                <div class="bar-fill" style="--w:72%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Postman / Testing</span><span class="skill-pct">68%</span>
+              <div class="bar">
+                <div class="bar-fill" style="--w:68%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Team Collaboration</span><span class="skill-pct">92%</span>
+              <div class="bar">
+                <div class="bar-fill" style="--w:92%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Problem Solving</span><span class="skill-pct">85%</span>
+              <div class="bar">
+                <div class="bar-fill" style="--w:85%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-stack reveal">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Dart</span>
+          <span class="tech-tag">Firebase</span>
+          <span class="tech-tag">Supabase</span>
+          <span class="tech-tag">MySQL</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Git</span>
+          <span class="tech-tag">Figma</span>
+          <span class="tech-tag">State Management</span>
+          <span class="tech-tag">REST API</span>
+        </div>
+      </div>
     </section>
 
-    <!-- skills section start -->
-    <section class="skills" id="skills">
-        <div class="max-width">
-            <h2 class="title">My skills</h2>
-            <div class="skills-content">
-                <div class="column left">
-                    <div class="text">My creative skills & experiences.</div>
-                    <p>Creative skills and experiences are essential for success in many fields, including marketing, advertising, design, and entertainment. A creative expert possesses a combination of artistic talent, imagination, and technical skills that enable them to conceive, develop, and execute innovative ideas and projects. They often have experience in a variety of mediums, including digital and traditional media, such as graphic design, video production, photography, copywriting, and more.</p>
-                    <a href="#">Read more</a>
-                </div>
-                <div class="column right">
-                    <div class="bars">
-                        <div class="info">
-                            <span>HTML & CSS</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="line html"></div>
-                    </div>
-                    <div class="bars">
-                        <div class="info">
-                            <span>Flutter</span>
-                            <span>60%</span>
-                        </div>
-                        <div class="line css"></div>
-                    </div>
-                    <div class="bars">
-                        <div class="info">
-                            <span>Figma</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="line js"></div>
-                    </div>
-                    <div class="bars">
-                        <div class="info">
-                            <span>Corel Draw</span>
-                            <span>50%</span>
-                        </div>
-                        <div class="line php"></div>
-                    </div>
-                    <div class="bars">
-                        <div class="info">
-                            <span>Adobe Photoshop</span>
-                            <span>70%</span>
-                        </div>
-                        <div class="line mysql"></div>
-                    </div>
-                </div>
-            </div>
+    <!-- ============ PROJECTS ============ -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-tag">My work</span>
+          <h2 class="section-title">Featured <span class="accent">Projects</span></h2>
+          <p class="section-sub">Some things I have built recently</p>
         </div>
+
+        <div class="project-filters reveal" id="projectFilters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="mobile">Mobile</button>
+          <button class="filter-btn" data-filter="web">Web</button>
+          <button class="filter-btn" data-filter="automation">Automation</button>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card reveal" data-category="mobile">
+            <div class="project-thumb" style="--thumb:#ff3d2e">
+              <span class="project-thumb-icon">&#128267;</span>
+              <span class="project-badge">Flutter</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Rent Mate | A Hotel Booking Platform</h3>
+              <p class="project-desc">Cross-platform app that support booking, chating and payment with esewa.
+                </p>
+              <div class="project-tech"><span>Flutter</span><span>Supabase</span><span>Provider</span></div>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="mobile">
+            <div class="project-thumb" style="--thumb:#3d7bff">
+              <span class="project-thumb-icon">&#9993;</span>
+              <span class="project-badge">Flutter</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">BPC LMS | A Complete Learning Management System</h3>
+              <p class="project-desc">Complete Learning Management System for BPC College, Birgunj</p>
+              <div class="project-tech"><span>Flutter</span><span>Supabase</span><span>PostgreSQL</span></div>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="web">
+            <div class="project-thumb" style="--thumb:#2ec98a">
+              <span class="project-thumb-icon">&#128722;</span>
+              <span class="project-badge">Web</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Sewa Setu | A Digital Governance System</h3>
+              <p class="project-desc">Full-stack application for digital governance in local municipalities.</p>
+              <div class="project-tech"><span>HTML</span><span>CSS</span><span>JS</span><span>PHP</span></div>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="mobile">
+            <div class="project-thumb" style="--thumb:#9b5cff">
+              <span class="project-thumb-icon">&#127775;</span>
+              <span class="project-badge">Flutter</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">AI Prompt Genius | AI-Powered Prompt Generator</h3>
+              <p class="project-desc">An app that designed and developed for generating AI prompts efficiently.</p>
+              <div class="project-tech"><span>Flutter</span><span>GEMINI API</span><span>GetX</span></div>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="web">
+            <div class="project-thumb" style="--thumb:#ffa03d">
+              <span class="project-thumb-icon">&#128200;</span>
+              <span class="project-badge">Web</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Gorkha Jaibik | An Ecommerce Platform</h3>
+              <p class="project-desc">An ecommerce platform that sells organic herbal products in Nepal.</p>
+              <div class="project-tech"><span>Wordpress</span><span>Woocommerce</span></div>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="automation">
+            <div class="project-thumb" style="--thumb:#ff4d88">
+              <span class="project-thumb-icon">&#128396;</span>
+              <span class="project-badge">Automation</span>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">WhatsApp Automation | Build Complete Message Automation</h3>
+              <p class="project-desc">Automatically reply the messages from customers and manage conversations efficiently.</p>
+              <div class="project-tech"><span>n8n</span><span>Gemini API</span> <span>Google Spreadsheet</span> </div>
+              
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- teams section start -->
-    <section class="teams" id="teams">
-        <div class="max-width">
-            <h2 class="title">My teams</h2>
-            <div class="carousel owl-carousel">
-                <div class="card">
-                    <div class="box">
-                        <img src="rohan.jpg" alt="">
-                        <div class="text">Rohan Chaudhary</div>
-                        <p>Studying Bachelor of Business Administration at HSMSS,Hetauda.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <img src="manraj.jpg" alt="">
-                        <div class="text">Manraj Thakur</div>
-                        <p>Studying Bachelor of Business Study at TRMC,Birgunj.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <img src="santosh.jpg" alt="">
-                        <div class="text">Santosh Pandey</div>
-                        <p>Studying Bachelor of Business Administration at TRMC,Birgunj</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <img src="bikee.jpg" alt="">
-                        <div class="text">Bikee Prajapati</div>
-                        <p>Studying Bachelor of Business Study at Shankar Dev Campus,KTM.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <img src="rishikesh.jpg" alt="">
-                        <div class="text">Rishikesh Sah</div>
-                        <p>Studying Bachelor of Business Management at Makwanpur Multiple Campus.<p>
-                    </div>
-                </div>
-            </div>
+    
+    <!-- ============ BLOG ============ -->
+    <section class="section" id="blog">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-tag">Latest posts</span>
+          <h2 class="section-title">From the <span class="accent">Blog</span></h2>
+          <p class="section-sub">Ideas, tutorials and lessons learned</p>
         </div>
+
+        <div class="blog-grid">
+          <article class="blog-card reveal">
+            <div class="blog-meta"><span class="blog-tag">Tutorial</span><span class="blog-date">Jul 2026</span></div>
+            <h3 class="blog-title">Getting Started with Riverpod: A Practical Guide</h3>
+            <p class="blog-desc">Learn state management the clean way with Riverpod through real app examples and common
+              pitfalls.</p>
+            <a href="#" class="blog-link">Read more &rarr;</a>
+          </article>
+          <article class="blog-card reveal">
+            <div class="blog-meta"><span class="blog-tag">Flutter</span><span class="blog-date">Jun 2026</span></div>
+            <h3 class="blog-title">5 Animations That Make Your Flutter App Feel Alive</h3>
+            <p class="blog-desc">Subtle motion can transform UX. Here are my favourite built-in Flutter animations with
+              code snippets.</p>
+            <a href="#" class="blog-link">Read more &rarr;</a>
+          </article>
+          <article class="blog-card reveal">
+            <div class="blog-meta"><span class="blog-tag">Career</span><span class="blog-date">May 2026</span></div>
+            <h3 class="blog-title">My First Hackathon: Lessons from the Front Row</h3>
+            <p class="blog-desc">What 48 hours of building under pressure taught me about teamwork, scope and shipping
+              fast.</p>
+            <a href="#" class="blog-link">Read more &rarr;</a>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- contact section start -->
-    <section class="contact" id="contact">
-        <div class="max-width">
-            <h2 class="title">Contact me</h2>
-            <div class="contact-content">
-                <div class="column left">
-                    <div class="text">Get in Touch</div>
-                    <p>Myself Dipesh Kumar Yadav and i am currently a learner. My greatest passion is in life using my technicals know-how to benifit other people or organizations.I am eager to be challenged in order to grow and further improve my IT skills.</p>
-                    <div class="icons">
-                        <div class="row">
-                            <i class="fas fa-user"></i>
-                            <div class="info">
-                                <div class="head">Name</div>
-                                <div class="sub-title">Dipesh Kumar Yadav</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div class="info">
-                                <div class="head">Address</div>
-                                <div class="sub-title">Parwanipur, Nepal</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <i class="fas fa-envelope"></i>
-                            <div class="info">
-                                <div class="head">Email</div>
-                                <div class="sub-title">deepeshy2895@gmail.com</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column right">
-                    <div class="text">Message me</div>
-                    <form action="#">
-                        <div class="fields">
-                            <div class="field name">
-                                <input type="text" placeholder="Name" required>
-                            </div>
-                            <div class="field email">
-                                <input type="email" placeholder="Email" required>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <input type="text" placeholder="Subject" required>
-                        </div>
-                        <div class="field textarea">
-                            <textarea cols="30" rows="10" placeholder="Message.." required></textarea>
-                        </div>
-                        <div class="button-area">
-                            <button type="submit">Send message</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <!-- ============ CONTACT ============ -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-tag">Get in touch</span>
+          <h2 class="section-title">Contact <span class="accent">Me</span></h2>
+          <p class="section-sub">Have a project idea? Let&rsquo;s talk!</p>
         </div>
+
+        <div class="contact-grid">
+          <div class="contact-info reveal">
+            <div class="contact-item">
+              <div class="contact-icon">&#128231;</div>
+              <div>
+                <h4>Email</h4>
+                <a href="mailto:dipeshyadav.dev@gmail.com">dipeshkmrydv@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">&#128205;</div>
+              <div>
+                <h4>Location</h4>
+                <p>Brijung, Nepal</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">&#128222;</div>
+              <div>
+                <h4>Phone</h4>
+                <p>+977 9816217614</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">&#128172;</div>
+              <div>
+                <h4>Socials</h4>
+                <div class="contact-socials">
+                  <a href="https://github.com/deepeshy2895" class="social-icon gh" aria-label="GitHub"></a>
+                  <a href="https://www.linkedin.com/in/dipesh-kumar-yadav-2861482b5/" class="social-icon li" aria-label="LinkedIn"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <form class="contact-form reveal" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Project inquiry" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..."
+                required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+            <p class="form-status" id="formStatus" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
     </section>
+  </main>
 
-    <!-- footer section start -->
-    <footer>
-        <span>Created By <a href="https://dipeshy3578.com.np">Deepesh Kumar Yadav</a> | <span class="far fa-copyright"></span> 2023 All rights reserved.</span>
-    </footer>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="#home" class="logo"><span class="logo-flame">&</span> dipesh<span class="logo-dot">.</span>dev</a>
+      <p>&copy; <span id="year"></span> Dipesh Yadav. Crafted with Flutter love &amp; hot coffee.</p>
+      <a href="#home" class="back-top" aria-label="Back to top">&#8593;</a>
+    </div>
+  </footer>
 
-    <script src="script.js"></script>
+  <script src="js/script.js"></script>
 </body>
+
 </html>
