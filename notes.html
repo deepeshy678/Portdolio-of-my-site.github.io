@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-color="fire">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Notes | Dipesh Yadav</title>
+
+  <meta
+    name="description"
+    content="View programming and technology notes by Dipesh Yadav."
+  />
+
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128218;</text></svg>"
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+
+  <header class="navbar" id="navbar">
+
+    <nav class="nav container">
+
+      <a href="index.html#home" class="logo">
+        <span class="logo-flame"></span>
+        Dipesh
+        <span class="logo-dot"></span>
+      </a>
+
+
+      <ul class="nav-links" id="navLinks">
+
+        <li>
+          <a href="index.html#home" class="nav-link">
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a href="index.html#about" class="nav-link">
+            About
+          </a>
+        </li>
+
+        <li>
+          <a href="index.html#skills" class="nav-link">
+            Skills
+          </a>
+        </li>
+
+        <li>
+          <a href="index.html#projects" class="nav-link">
+            Projects
+          </a>
+        </li>
+
+        <li>
+          <a href="index.html#notes" class="nav-link active">
+            Notes
+          </a>
+        </li>
+
+        <li>
+          <a href="index.html#contact" class="nav-link">
+            Contact
+          </a>
+        </li>
+
+      </ul>
+
+
+      <div class="nav-tools">
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          aria-label="Toggle light/dark theme"
+        >
+          <span class="icon-sun">&#9728;</span>
+          <span class="icon-moon">&#9790;</span>
+          <span class="toggle-thumb"></span>
+        </button>
+
+
+        <div class="color-picker" id="colorPicker">
+
+          <button
+            class="color-picker-btn"
+            id="colorPickerBtn"
+            aria-label="Change accent color"
+          >
+            <span class="color-drop"></span>
+          </button>
+
+          <div class="color-menu" id="colorMenu">
+
+            <span class="color-menu-title">
+              Accent Color
+            </span>
+
+            <button
+              class="color-swatch"
+              data-color="fire"
+              style="--swatch:#ff3d2e"
+              title="Fiery Red"
+            ></button>
+
+            <button
+              class="color-swatch"
+              data-color="rose"
+              style="--swatch:#ff4d88"
+              title="Rose"
+            ></button>
+
+            <button
+              class="color-swatch"
+              data-color="blue"
+              style="--swatch:#3d7bff"
+              title="Blue"
+            ></button>
+
+            <button
+              class="color-swatch"
+              data-color="forest"
+              style="--swatch:#2ec98a"
+              title="Forest"
+            ></button>
+
+            <button
+              class="color-swatch"
+              data-color="violet"
+              style="--swatch:#9b5cff"
+              title="Violet"
+            ></button>
+
+            <button
+              class="color-swatch"
+              data-color="amber"
+              style="--swatch:#ffa03d"
+              title="Amber"
+            ></button>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="hamburger"
+          id="hamburger"
+          aria-label="Open menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <!-- ================= PDF PAGE ================= -->
+
+  <main class="notes-page">
+
+    <div class="container">
+
+      <a
+        href="index.html#notes"
+        class="notes-back"
+      >
+        ← Back to Notes
+      </a>
+
+
+      <div class="note-viewer">
+
+        <div class="note-viewer-header">
+
+          <div>
+
+            <span
+              id="viewerCategory"
+              class="note-category"
+            >
+              Loading...
+            </span>
+
+            <h1
+              id="viewerTitle"
+              class="note-viewer-title"
+            >
+              Loading note...
+            </h1>
+
+            <p
+              id="viewerDescription"
+              class="note-viewer-description"
+            ></p>
+
+          </div>
+
+        </div>
+
+
+        <!-- PDF -->
+
+        <iframe
+          id="pdfViewer"
+          class="pdf-viewer"
+          src=""
+          title="PDF Notes"
+        ></iframe>
+
+
+        <div
+          id="viewerError"
+          class="notes-error"
+          style="display: none;"
+        >
+          Unable to load this note.
+        </div>
+
+                <!-- ================= CLASSES CTA ================= -->
+
+        <div class="classes-cta">
+
+          <div class="classes-cta-content">
+
+            <span class="classes-cta-tag">
+              Want to Learn More?
+            </span>
+
+            <h2>
+              Want to Join the Classes?
+            </h2>
+
+            <p>
+              If you want to learn this topic through classes,
+              contact me on WhatsApp for more information.
+            </p>
+
+            <a
+              href="https://wa.me/9816217614"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="classes-whatsapp-btn"
+            >
+              <span>💬</span>
+              Contact on WhatsApp
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer class="footer">
+
+    <div class="container footer-inner">
+
+      <a
+        href="index.html#home"
+        class="logo"
+      >
+        <span class="logo-flame">&</span>
+        dipesh<span class="logo-dot">.</span>dev
+      </a>
+
+      <p>
+        &copy;
+        <span id="year"></span>
+        Dipesh Yadav.
+        All Copyrights Reserved
+      </p>
+
+      <a
+        href="index.html#home"
+        class="back-top"
+        aria-label="Back to top"
+      >
+        &#8593;
+      </a>
+
+    </div>
+
+  </footer>
+
+
+  <!-- ================= SUPABASE ================= -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="script.js"></script>
+
+
+  <!-- ================= LOAD NOTE ================= -->
+
+  <script>
+
+    const params =
+      new URLSearchParams(window.location.search);
+
+    const noteId =
+      params.get("id");
+
+
+    const viewerCategory =
+      document.getElementById("viewerCategory");
+
+    const viewerTitle =
+      document.getElementById("viewerTitle");
+
+    const viewerDescription =
+      document.getElementById("viewerDescription");
+
+    const pdfViewer =
+      document.getElementById("pdfViewer");
+
+    const viewerError =
+      document.getElementById("viewerError");
+
+
+    async function loadNote() {
+
+      if (!noteId) {
+
+        showError();
+
+        return;
+      }
+
+
+      const { data, error } =
+        await supabaseClient
+
+          .from("notes")
+
+          .select("*")
+
+          .eq("id", noteId)
+
+          .eq("published", true)
+
+          .single();
+
+
+      if (error || !data) {
+
+        console.error(
+          "Error loading note:",
+          error
+        );
+
+        showError();
+
+        return;
+      }
+
+
+      viewerCategory.textContent =
+        data.category || "";
+
+
+      viewerTitle.textContent =
+        data.title || "Notes";
+
+
+      viewerDescription.textContent =
+        data.description || "";
+
+
+      pdfViewer.src =
+        data.pdf_url;
+
+
+      document.title =
+        `${data.title} | Notes`;
+
+
+    }
+
+
+    function showError() {
+
+      viewerCategory.style.display =
+        "none";
+
+      viewerTitle.textContent =
+        "Note not found";
+
+      viewerDescription.textContent =
+        "";
+
+      pdfViewer.style.display =
+        "none";
+
+      viewerError.style.display =
+        "block";
+
+    }
+
+
+    loadNote();
+
+  </script>
+
+</body>
+
+</html>
