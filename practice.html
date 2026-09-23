@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-color="fire">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practice Questions | Dipesh Yadav</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { min-height: 100vh; background: #0b1020; }
+    .practice-page { min-height: 100vh; padding: 115px 20px 70px; }
+    .practice-shell { max-width: 900px; margin: auto; }
+    .practice-back { display:inline-block; margin-bottom:22px; color:#94a3b8; text-decoration:none; font-weight:700; }
+    .practice-card { overflow:hidden; border:1px solid #26324b; border-radius:22px; background:#111827; box-shadow:0 24px 70px rgba(0,0,0,.35); }
+    .terminal-bar { display:flex; align-items:center; gap:8px; padding:15px 20px; background:#182235; border-bottom:1px solid #26324b; }
+    .terminal-dot { width:11px; height:11px; border-radius:50%; background:#fb7185; }
+    .terminal-dot:nth-child(2) { background:#fbbf24; }.terminal-dot:nth-child(3) { background:#34d399; }
+    .terminal-file { margin-left:10px; color:#94a3b8; font:600 13px ui-monospace,monospace; }
+    .practice-content { padding:40px; }
+    .practice-kicker { color:#34d399; font:700 13px ui-monospace,monospace; }
+    h1 { margin:10px 0; color:#f8fafc; font-size:clamp(28px,5vw,44px); }.practice-content p { color:#94a3b8; }
+    .chapter-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:13px; margin-top:28px; }
+    .chapter-button { padding:18px; border:1px solid #31415f; border-radius:13px; background:#151f31; color:#e2e8f0; text-align:left; cursor:pointer; font:600 14px inherit; transition:.2s; }
+    .chapter-button:hover,.chapter-button.active { border-color:#34d399; background:#12362f; transform:translateY(-2px); }.chapter-button small { display:block; margin-top:6px; color:#94a3b8; }
+    #practiceArea { display:none; }.practice-meta { display:flex; justify-content:space-between; gap:15px; color:#94a3b8; font:600 13px ui-monospace,monospace; }
+    .practice-question { margin:25px 0; color:#f8fafc; font-size:22px; line-height:1.55; }.practice-options { display:grid; gap:11px; }
+    .practice-option { padding:15px; border:1px solid #31415f; border-radius:11px; background:#151f31; color:#e2e8f0; text-align:left; cursor:pointer; font:inherit; }.practice-option:hover { border-color:#60a5fa; }.practice-option.correct { border-color:#34d399; background:#12362f; }.practice-option.wrong { border-color:#fb7185; background:#431d31; }
+    .practice-feedback { display:none; margin-top:18px; padding:15px; border-left:3px solid #34d399; background:#122439; color:#cbd5e1; line-height:1.6; }.practice-actions { display:flex; justify-content:space-between; margin-top:24px; }.code-button { padding:12px 18px; border:0; border-radius:10px; background:#34d399; color:#062018; cursor:pointer; font-weight:800; }.code-button:disabled { opacity:.45; cursor:not-allowed; }.practice-error { padding:18px; color:#fda4af; background:#431d31; border-radius:12px; }
+    /* Site-style overrides: remove the terminal appearance. */
+    body { background: var(--bg); }
+    .practice-page { min-height: calc(100vh - 80px); }
+    .practice-shell { max-width: 980px; }
+    .practice-back { color: var(--text-muted); }
+    .practice-back:hover { color: var(--accent); }
+    .practice-card { border: 1px solid var(--border); background: var(--bg-card); box-shadow: var(--shadow-lg); }
+    .terminal-bar { padding: 22px 30px; background: var(--accent-soft); border-bottom: 1px solid var(--border); }
+    .terminal-dot { display: none; }
+    .terminal-file { margin: 0; color: var(--accent); font: 800 14px Poppins,sans-serif; }
+    .practice-content { padding: 42px; }
+    .practice-kicker { color: var(--accent); font-family: Poppins,sans-serif; }
+    h1,.practice-question { color: var(--text); }
+    .practice-content p,.practice-meta { color: var(--text-muted); font-family: Poppins,sans-serif; }
+    .chapter-button { border-color: var(--border); background: var(--bg-soft); color: var(--text); }
+    .chapter-button:hover,.chapter-button.active { border-color: var(--accent); background: var(--accent-soft); }
+    .chapter-button small { color: var(--text-muted); }
+    .practice-feedback { border-left-color: var(--accent); background: var(--accent-soft); color: var(--text); }
+    .code-button { background: var(--accent); color: #fff; border-radius: 12px; }
+    .practice-error { color: #dc2626; background: rgba(220,38,38,.1); }
+    @media(max-width:600px){.practice-content{padding:25px 18px}.practice-question{font-size:19px}}
+  </style>
+</head>
+<body>
+  <main class="practice-page"><div class="practice-shell">
+    <a id="backToNotes" class="practice-back" href="#">← Back to notes</a>
+    <section class="practice-card"><div class="terminal-bar"><span class="terminal-file">Practice Questions</span></div>
+      <div class="practice-content">
+        <div id="chapterArea"><span class="practice-kicker">PRACTICE BY CHAPTER</span><h1 id="practiceTitle">Practice Questions</h1><p id="practiceIntro">Choose a chapter to practice at your own pace.</p><div id="chapterList" class="chapter-grid"></div></div>
+        <div id="practiceArea"><div class="practice-meta"><span id="practiceChapter"></span><span id="practiceProgress"></span></div><h2 id="practiceQuestion" class="practice-question"></h2><div id="practiceFeedback" class="practice-feedback"></div><div class="practice-actions"><button id="changeChapter" class="code-button">Change chapter</button><button id="revealAnswer" class="code-button">Reveal answer</button><button id="nextQuestion" class="code-button">Next question →</button></div></div>
+        <div id="practiceError" class="practice-error" style="display:none;"></div>
+      </div>
+    </section>
+  </div></main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="script.js"></script>
+  <script>
+    const noteId=new URLSearchParams(location.search).get('note_id'); let practiceQuestions=[], currentQuestions=[], index=0;
+    const el=id=>document.getElementById(id); const escape=value=>String(value||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+    function error(message){el('practiceError').textContent=message;el('practiceError').style.display='block';}
+    async function load(){ if(!noteId){error('Practice note was not found.');return;} el('backToNotes').href='notes.html?id='+encodeURIComponent(noteId);
+      const {data:quiz,error:quizError}=await supabaseClient.from('quizzes').select('id,title').eq('note_id',noteId).eq('published',true).maybeSingle(); if(quizError||!quiz){error('No published practice quiz is available for this note.');return;} el('practiceTitle').textContent=quiz.title+' Practice';
+      const [{data:chapters,error:chapterError},{data:questions,error:questionError}]=await Promise.all([supabaseClient.from('quiz_chapters').select('id,name').eq('quiz_id',quiz.id).order('name'),supabaseClient.from('practice_questions').select('*').eq('quiz_id',quiz.id).order('question_order')]);
+      if(chapterError||questionError){error('Unable to load written practice questions. Run the written-practice SQL migration first.');return;} practiceQuestions=questions||[];
+      const available=(chapters||[]).filter(c=>practiceQuestions.some(q=>String(q.chapter_id)===String(c.id))); if(!available.length){error('No written practice questions have been added yet. Add them from Admin → Quiz Management → Written Practice Questions.');return;}
+      el('chapterList').innerHTML=available.map(c=>{const count=practiceQuestions.filter(q=>String(q.chapter_id)===String(c.id)).length;return `<button class="chapter-button" data-id="${c.id}" data-name="${escape(c.name)}">${escape(c.name)}<small>${count} practice question${count===1?'':'s'}</small></button>`}).join(''); el('chapterList').querySelectorAll('button').forEach(b=>b.onclick=()=>startChapter(b.dataset.id,b.dataset.name)); }
+    function startChapter(id,name){currentQuestions=practiceQuestions.filter(q=>String(q.chapter_id)===String(id));index=0;el('chapterArea').style.display='none';el('practiceArea').style.display='block';el('practiceChapter').textContent=name;showQuestion();}
+    function showQuestion(){const q=currentQuestions[index];el('practiceProgress').textContent=`${index+1} / ${currentQuestions.length}`;el('practiceQuestion').textContent=q.question;el('practiceFeedback').style.display='none';el('nextQuestion').textContent=index===currentQuestions.length-1?'Finish practice':'Next question →';}
+    el('revealAnswer').onclick=()=>{const q=currentQuestions[index];el('practiceFeedback').innerHTML=(q.answer?'<strong>Suggested answer:</strong><br>'+escape(q.answer):'<strong>Think through your own answer first.</strong>')+(q.explanation?'<br><br>'+escape(q.explanation):'');el('practiceFeedback').style.display='block';};
+    el('nextQuestion').onclick=()=>{if(index===currentQuestions.length-1){el('practiceArea').style.display='none';el('chapterArea').style.display='block';return;}index++;showQuestion();};el('changeChapter').onclick=()=>{el('practiceArea').style.display='none';el('chapterArea').style.display='block';};load();
+  </script>
+</body></html>
