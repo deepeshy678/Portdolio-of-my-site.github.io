@@ -8,14 +8,10 @@
 
   <title>Notes | Dipesh Yadav</title>
 
-  <meta
-    name="description"
-    content="View programming and technology notes by Dipesh Yadav."
-  />
+  <meta name="description" content="View programming and technology notes by Dipesh Yadav." />
 
   <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128218;</text></svg>"
-  />
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128218;</text></svg>" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
 
@@ -23,10 +19,451 @@
 
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
+    rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .quiz-section {
+      margin: 40px auto;
+      max-width: 950px;
+    }
+
+    .quiz-card {
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg, 20px);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .quiz-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 25px;
+    }
+
+    .quiz-icon {
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-radius: 16px;
+      background: var(--accent-soft);
+      font-size: 27px;
+    }
+
+    .quiz-header h2 {
+      margin: 0 0 5px;
+      color: var(--text);
+      font-size: 24px;
+    }
+
+    .quiz-header p {
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .quiz-start-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 25px 0;
+    }
+
+    .quiz-stat {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: center;
+      background: var(--bg-soft);
+    }
+
+    .quiz-stat strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+      font-size: 20px;
+    }
+
+    .quiz-stat span {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .quiz-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .quiz-button:hover {
+      background: var(--accent-strong);
+      transform: translateY(-1px);
+    }
+
+    .quiz-secondary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 20px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg-card);
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .quiz-progress {
+      margin-bottom: 25px;
+    }
+
+    .quiz-progress-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .quiz-progress-bar {
+      width: 100%;
+      height: 8px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: var(--bg-soft);
+    }
+
+    .quiz-progress-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--accent);
+      transition: width .3s ease;
+    }
+
+    #startQuizButton {
+      display: none;
+    }
+
+    .quiz-question {
+      margin-bottom: 25px;
+      color: var(--text);
+      font-size: 22px;
+      line-height: 1.45;
+    }
+
+    .quiz-options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .quiz-option {
+      width: 100%;
+      padding: 17px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-card);
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .quiz-option.selected {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .quiz-option.correct {
+      border-color: #16a34a;
+      background: rgba(22, 163, 74, .10);
+    }
+
+    .quiz-option.wrong {
+      border-color: #dc2626;
+      background: rgba(220, 38, 38, .10);
+    }
+
+    .quiz-option-letter {
+      display: inline-flex;
+      width: 30px;
+      height: 30px;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      border-radius: 8px;
+      background: var(--bg-soft);
+      font-weight: 800;
+    }
+
+    .quiz-feedback {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 14px;
+      background: var(--bg-soft);
+      color: var(--text);
+    }
+
+    .quiz-feedback strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .quiz-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .quiz-result {
+      text-align: center;
+    }
+
+    .quiz-result-score {
+      margin: 20px 0;
+      color: var(--accent);
+      font-size: 54px;
+      font-weight: 900;
+    }
+
+    .quiz-result-message {
+      margin-bottom: 25px;
+      color: var(--text-soft);
+    }
+
+    .quiz-error {
+      padding: 18px;
+      border-radius: 12px;
+      background: rgba(220, 38, 38, .08);
+      color: #dc2626;
+    }
+
+    @media (max-width: 650px) {
+      .quiz-card {
+        padding: 20px;
+      }
+
+      .quiz-start-info {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-question {
+        font-size: 19px;
+      }
+
+      .quiz-actions {
+        flex-direction: column;
+      }
+
+      .quiz-button,
+      .quiz-secondary-button {
+        width: 100%;
+      }
+    }
+
+    /* =========================================
+   HEADER START PRACTICE BUTTON
+========================================= */
+
+    .note-title-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+      width: 100%;
+    }
+
+    .note-title-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .note-quiz-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .header-practice-questions {
+      border-color: #22c55e;
+      color: #22c55e;
+    }
+
+    .header-start-practice {
+      position: relative;
+      flex-shrink: 0;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+
+      padding: 13px 20px;
+
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+
+      background: var(--bg-card);
+      color: var(--accent-strong);
+
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      box-shadow: 0 8px 25px var(--accent-glow);
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+
+      animation: practiceFloat 2.5s ease-in-out infinite;
+    }
+
+    .header-start-practice::before {
+      content: "";
+      position: absolute;
+      inset: -5px;
+
+      border-radius: inherit;
+
+      border: 1px solid var(--accent);
+
+      opacity: 0;
+
+      animation: practicePulse 2.5s ease-out infinite;
+
+      pointer-events: none;
+    }
+
+    .header-start-practice:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px var(--accent-glow);
+      background: var(--accent-soft);
+    }
+
+    .header-start-practice:active {
+      transform: translateY(-1px) scale(0.97);
+    }
+
+    .practice-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 16px;
+
+      animation: practiceSpark 1.5s ease-in-out infinite;
+    }
+
+    .practice-arrow {
+      display: inline-block;
+
+      transition: transform 0.25s ease;
+    }
+
+    .header-start-practice:hover .practice-arrow {
+      transform: translateX(4px);
+    }
+
+    @keyframes practiceFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-3px);
+      }
+    }
+
+    @keyframes practicePulse {
+      0% {
+        transform: scale(0.95);
+        opacity: 0.55;
+      }
+
+      70% {
+        transform: scale(1.15);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1.15);
+        opacity: 0;
+      }
+    }
+
+    @keyframes practiceSpark {
+
+      0%,
+      100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: rotate(15deg) scale(1.2);
+        opacity: 0.7;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .note-title-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .header-start-practice {
+        width: 100%;
+      }
+
+      .note-quiz-actions {
+        width: 100%;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+
+      .header-start-practice,
+      .header-start-practice::before,
+      .practice-icon {
+        animation: none;
+      }
+
+      .header-start-practice,
+      .practice-arrow {
+        transition: none;
+      }
+    }
+  </style>
 </head>
 
 
@@ -88,11 +525,7 @@
 
       <div class="nav-tools">
 
-        <button
-          class="theme-toggle"
-          id="themeToggle"
-          aria-label="Toggle light/dark theme"
-        >
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
           <span class="icon-sun">&#9728;</span>
           <span class="icon-moon">&#9790;</span>
           <span class="toggle-thumb"></span>
@@ -101,11 +534,7 @@
 
         <div class="color-picker" id="colorPicker">
 
-          <button
-            class="color-picker-btn"
-            id="colorPickerBtn"
-            aria-label="Change accent color"
-          >
+          <button class="color-picker-btn" id="colorPickerBtn" aria-label="Change accent color">
             <span class="color-drop"></span>
           </button>
 
@@ -115,58 +544,24 @@
               Accent Color
             </span>
 
-            <button
-              class="color-swatch"
-              data-color="fire"
-              style="--swatch:#ff3d2e"
-              title="Fiery Red"
-            ></button>
+            <button class="color-swatch" data-color="fire" style="--swatch:#ff3d2e" title="Fiery Red"></button>
 
-            <button
-              class="color-swatch"
-              data-color="rose"
-              style="--swatch:#ff4d88"
-              title="Rose"
-            ></button>
+            <button class="color-swatch" data-color="rose" style="--swatch:#ff4d88" title="Rose"></button>
 
-            <button
-              class="color-swatch"
-              data-color="blue"
-              style="--swatch:#3d7bff"
-              title="Blue"
-            ></button>
+            <button class="color-swatch" data-color="blue" style="--swatch:#3d7bff" title="Blue"></button>
 
-            <button
-              class="color-swatch"
-              data-color="forest"
-              style="--swatch:#2ec98a"
-              title="Forest"
-            ></button>
+            <button class="color-swatch" data-color="forest" style="--swatch:#2ec98a" title="Forest"></button>
 
-            <button
-              class="color-swatch"
-              data-color="violet"
-              style="--swatch:#9b5cff"
-              title="Violet"
-            ></button>
+            <button class="color-swatch" data-color="violet" style="--swatch:#9b5cff" title="Violet"></button>
 
-            <button
-              class="color-swatch"
-              data-color="amber"
-              style="--swatch:#ffa03d"
-              title="Amber"
-            ></button>
+            <button class="color-swatch" data-color="amber" style="--swatch:#ffa03d" title="Amber"></button>
 
           </div>
 
         </div>
 
 
-        <button
-          class="hamburger"
-          id="hamburger"
-          aria-label="Open menu"
-        >
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
           <span></span>
           <span></span>
           <span></span>
@@ -185,10 +580,7 @@
 
     <div class="container">
 
-      <a
-        href="index.html#notes"
-        class="notes-back"
-      >
+      <a href="index.html#notes" class="notes-back">
         ← Back to Notes
       </a>
 
@@ -199,24 +591,30 @@
 
           <div>
 
-            <span
-              id="viewerCategory"
-              class="note-category"
-            >
+            <span id="viewerCategory" class="note-category">
               Loading...
             </span>
 
-            <h1
-              id="viewerTitle"
-              class="note-viewer-title"
-            >
-              Loading note...
-            </h1>
+            <div class="note-title-row">
+              <div class="note-title-content">
+                <h1 id="viewerTitle" class="note-viewer-title"></h1>
 
-            <p
-              id="viewerDescription"
-              class="note-viewer-description"
-            ></p>
+                <p id="viewerDescription" class="note-viewer-description"></p>
+              </div>
+
+              <div class="note-quiz-actions">
+              <button id="headerPracticeButton" class="header-start-practice header-practice-questions" type="button">
+                <span class="practice-icon">&lt;/&gt;</span>
+                <span>Practice Questions</span>
+                <span class="practice-arrow">→</span>
+              </button>
+              <button id="headerStartQuizButton" class="header-start-practice" type="button">
+                <span class="practice-icon">✦</span>
+                <span>Start Quiz</span>
+                <span class="practice-arrow">→</span>
+              </button>
+              </div>
+            </div>
 
           </div>
 
@@ -225,23 +623,14 @@
 
         <!-- PDF -->
 
-        <iframe
-          id="pdfViewer"
-          class="pdf-viewer"
-          src=""
-          title="PDF Notes"
-        ></iframe>
+        <iframe id="pdfViewer" class="pdf-viewer" src="" title="PDF Notes"></iframe>
 
 
-        <div
-          id="viewerError"
-          class="notes-error"
-          style="display: none;"
-        >
+        <div id="viewerError" class="notes-error" style="display: none;">
           Unable to load this note.
         </div>
 
-                <!-- ================= CLASSES CTA ================= -->
+        <!-- ================= CLASSES CTA ================= -->
 
         <div class="classes-cta">
 
@@ -260,12 +649,7 @@
               contact me on WhatsApp for more information.
             </p>
 
-            <a
-              href="https://wa.me/9816217614"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="classes-whatsapp-btn"
-            >
+            <a href="https://wa.me/9816217614" target="_blank" rel="noopener noreferrer" class="classes-whatsapp-btn">
               <span>💬</span>
               Contact on WhatsApp
             </a>
@@ -287,10 +671,7 @@
 
     <div class="container footer-inner">
 
-      <a
-        href="index.html#home"
-        class="logo"
-      >
+      <a href="index.html#home" class="logo">
         <span class="logo-flame">&</span>
         dipesh<span class="logo-dot">.</span>dev
       </a>
@@ -302,11 +683,7 @@
         All Copyrights Reserved
       </p>
 
-      <a
-        href="index.html#home"
-        class="back-top"
-        aria-label="Back to top"
-      >
+      <a href="index.html#home" class="back-top" aria-label="Back to top">
         &#8593;
       </a>
 
@@ -326,110 +703,609 @@
 
   <script>
 
-    const params =
-      new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(window.location.search);
+    const noteId = params.get("id");
 
-    const noteId =
-      params.get("id");
+    const quizSection = document.getElementById("quizSection");
+
+    const quizStart = document.getElementById("quizStart");
+    const quizPlaying = document.getElementById("quizPlaying");
+    const quizResult = document.getElementById("quizResult");
+    const quizError = document.getElementById("quizError");
+
+    const quizTitle = document.getElementById("quizTitle");
+    const quizDescription = document.getElementById("quizDescription");
+
+    const quizQuestionCount = document.getElementById("quizQuestionCount");
+    const quizPassPercentage = document.getElementById("quizPassPercentage");
+
+    const startQuizButton = document.getElementById("startQuizButton");
+    const nextQuizButton = document.getElementById("nextQuizButton");
+    const retryQuizButton = document.getElementById("retryQuizButton");
+
+    const quizQuestion = document.getElementById("quizQuestion");
+    const quizOptions = document.getElementById("quizOptions");
+    const quizFeedback = document.getElementById("quizFeedback");
+
+    const quizProgressText = document.getElementById("quizProgressText");
+    const quizScoreText = document.getElementById("quizScoreText");
+    const quizProgressFill = document.getElementById("quizProgressFill");
+
+    const quizResultScore = document.getElementById("quizResultScore");
+    const quizResultMessage = document.getElementById("quizResultMessage");
+    const quizCorrectCount = document.getElementById("quizCorrectCount");
+    const quizWrongCount = document.getElementById("quizWrongCount");
+    const quizTotalCount = document.getElementById("quizTotalCount");
+
+    const backToPdfButton = document.getElementById("backToPdfButton");
+
+    let currentQuiz = null;
+    let quizQuestions = [];
+    let currentQuestionIndex = 0;
+    let quizScore = 0;
+    let answered = false;
 
 
-    const viewerCategory =
-      document.getElementById("viewerCategory");
-
-    const viewerTitle =
-      document.getElementById("viewerTitle");
-
-    const viewerDescription =
-      document.getElementById("viewerDescription");
-
-    const pdfViewer =
-      document.getElementById("pdfViewer");
-
-    const viewerError =
-      document.getElementById("viewerError");
-
+    /* =========================================================
+       LOAD NOTE
+    ========================================================= */
 
     async function loadNote() {
 
       if (!noteId) {
-
         showError();
-
         return;
       }
 
-
-      const { data, error } =
-        await supabaseClient
-
-          .from("notes")
-
-          .select("*")
-
-          .eq("id", noteId)
-
-          .eq("published", true)
-
-          .single();
-
+      const { data, error } = await supabaseClient
+        .from("notes")
+        .select("*")
+        .eq("id", noteId)
+        .eq("published", true)
+        .single();
 
       if (error || !data) {
-
-        console.error(
-          "Error loading note:",
-          error
-        );
-
+        console.error(error);
         showError();
-
         return;
       }
 
-
-      viewerCategory.textContent =
+      document.getElementById("viewerCategory").textContent =
         data.category || "";
 
+      document.getElementById("viewerTitle").textContent =
+        data.title || "";
 
-      viewerTitle.textContent =
-        data.title || "Notes";
-
-
-      viewerDescription.textContent =
+      document.getElementById("viewerDescription").textContent =
         data.description || "";
 
-
-      pdfViewer.src =
+      document.getElementById("pdfViewer").src =
         data.pdf_url;
 
-
       document.title =
-        `${data.title} | Notes`;
+        data.title + " | Dipesh Portfolio";
 
+      backToPdfButton.href =
+        "#pdfViewer";
 
     }
 
+
+    /* =========================================================
+       LOAD QUIZ
+    ========================================================= */
+
+    async function loadQuiz() {
+
+      const { data: quiz, error: quizError } =
+        await supabaseClient
+          .from("quizzes")
+          .select("*")
+          .eq("note_id", noteId)
+          .eq("published", true)
+          .maybeSingle();
+
+      if (quizError) {
+
+        console.error("Quiz error:", quizError);
+
+        return;
+      }
+
+      if (!quiz) {
+
+        quizSection.style.display = "none";
+
+        return;
+      }
+
+      const { data: questions, error: questionsError } =
+        await supabaseClient
+          .from("quiz_questions")
+          .select("*")
+          .eq("quiz_id", quiz.id)
+          .order("question_order", {
+            ascending: true
+          });
+
+      if (questionsError) {
+
+        console.error(
+          "Questions error:",
+          questionsError
+        );
+
+        return;
+      }
+
+      if (!questions || questions.length === 0) {
+
+        quizSection.style.display = "none";
+
+        return;
+      }
+
+      currentQuiz = quiz;
+
+      quizQuestions = questions;
+
+      quizTitle.textContent =
+        quiz.title || "Practice Quiz";
+
+      quizDescription.textContent =
+        quiz.description ||
+        "Test your understanding of this note.";
+
+      quizQuestionCount.textContent =
+        questions.length;
+
+      quizPassPercentage.textContent =
+        (quiz.pass_percentage || 60) + "%";
+
+      quizSection.style.display = "block";
+
+    }
+
+
+    /* =========================================================
+       START QUIZ
+    ========================================================= */
+
+    startQuizButton?.addEventListener(
+      "click",
+      function () {
+
+        startQuiz();
+
+      }
+    );
+
+
+    function startQuiz() {
+
+      currentQuestionIndex = 0;
+
+      quizScore = 0;
+
+      answered = false;
+
+      quizQuestions =
+        shuffleArray([...quizQuestions]);
+
+      quizStart.style.display = "none";
+
+      quizResult.style.display = "none";
+
+      quizPlaying.style.display = "block";
+
+      showQuestion();
+
+    }
+
+
+    /* =========================================================
+       SHOW QUESTION
+    ========================================================= */
+
+    function showQuestion() {
+
+      answered = false;
+
+      nextQuizButton.disabled = true;
+
+      quizFeedback.style.display = "none";
+
+      const question =
+        quizQuestions[currentQuestionIndex];
+
+      if (!question) {
+
+        finishQuiz();
+
+        return;
+
+      }
+
+      const total =
+        quizQuestions.length;
+
+      const current =
+        currentQuestionIndex + 1;
+
+      quizProgressText.textContent =
+        "Question " + current + " of " + total;
+
+      quizScoreText.textContent =
+        "Score: " + quizScore;
+
+      quizProgressFill.style.width =
+        ((current / total) * 100) + "%";
+
+      quizQuestion.textContent =
+        question.question;
+
+      quizOptions.innerHTML = "";
+
+      const options = [
+
+        {
+          letter: "A",
+          text: question.option_a
+        },
+
+        {
+          letter: "B",
+          text: question.option_b
+        },
+
+        {
+          letter: "C",
+          text: question.option_c
+        },
+
+        {
+          letter: "D",
+          text: question.option_d
+        }
+
+      ];
+
+      shuffleArray(options);
+
+      options.forEach(function (option) {
+
+        const button =
+          document.createElement("button");
+
+        button.type = "button";
+
+        button.className =
+          "quiz-option";
+
+        button.dataset.answer =
+          option.letter;
+
+        button.innerHTML = `
+      <span class="quiz-option-letter">
+        ${option.letter}
+      </span>
+      ${escapeQuizHTML(option.text)}
+    `;
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            selectAnswer(
+              button,
+              option.letter,
+              question
+            );
+
+          }
+        );
+
+        quizOptions.appendChild(button);
+
+      });
+
+    }
+
+
+    /* =========================================================
+       SELECT ANSWER
+    ========================================================= */
+
+    function selectAnswer(
+      selectedButton,
+      selectedAnswer,
+      question
+    ) {
+
+      if (answered) return;
+
+      answered = true;
+
+      const correctAnswer =
+        question.correct_answer;
+
+      const buttons =
+        quizOptions.querySelectorAll(
+          ".quiz-option"
+        );
+
+      buttons.forEach(function (button) {
+
+        button.disabled = true;
+
+        const answer =
+          button.dataset.answer;
+
+        if (answer === correctAnswer) {
+
+          button.classList.add(
+            "correct"
+          );
+
+        }
+
+      });
+
+      if (selectedAnswer === correctAnswer) {
+
+        quizScore++;
+
+        selectedButton.classList.add(
+          "correct"
+        );
+
+        quizFeedback.innerHTML = `
+      <strong>✓ Correct!</strong>
+      ${escapeQuizHTML(
+          question.explanation ||
+          "Your answer is correct."
+        )}
+    `;
+
+      } else {
+
+        selectedButton.classList.add(
+          "wrong"
+        );
+
+        quizFeedback.innerHTML = `
+      <strong>✕ Not quite.</strong>
+      <div style="margin-bottom:8px;">
+        Correct answer:
+        ${correctAnswer}
+      </div>
+      ${escapeQuizHTML(
+          question.explanation ||
+          "Review this concept and try again."
+        )}
+    `;
+
+      }
+
+      quizFeedback.style.display =
+        "block";
+
+      quizScoreText.textContent =
+        "Score: " + quizScore;
+
+      nextQuizButton.disabled =
+        false;
+
+    }
+
+
+    /* =========================================================
+       NEXT QUESTION
+    ========================================================= */
+
+    nextQuizButton?.addEventListener(
+      "click",
+      function () {
+
+        if (!answered) return;
+
+        currentQuestionIndex++;
+
+        if (
+          currentQuestionIndex >=
+          quizQuestions.length
+        ) {
+
+          finishQuiz();
+
+          return;
+
+        }
+
+        showQuestion();
+
+      }
+    );
+
+
+    /* =========================================================
+       FINISH
+    ========================================================= */
+
+    function finishQuiz() {
+
+      quizPlaying.style.display =
+        "none";
+
+      quizResult.style.display =
+        "block";
+
+      const total =
+        quizQuestions.length;
+
+      const correct =
+        quizScore;
+
+      const wrong =
+        total - correct;
+
+      const percentage =
+        total > 0
+          ? Math.round(
+            (correct / total) * 100
+          )
+          : 0;
+
+      const passPercentage =
+        currentQuiz.pass_percentage ||
+        60;
+
+      quizResultScore.textContent =
+        percentage + "%";
+
+      quizCorrectCount.textContent =
+        correct;
+
+      quizWrongCount.textContent =
+        wrong;
+
+      quizTotalCount.textContent =
+        total;
+
+      if (percentage >= passPercentage) {
+
+        quizResultMessage.textContent =
+          "Great work! You passed the quiz with " +
+          percentage +
+          "%.";
+
+      } else {
+
+        quizResultMessage.textContent =
+          "Keep practicing. You scored " +
+          percentage +
+          "%. Review the note and try again.";
+
+      }
+
+    }
+
+
+    /* =========================================================
+       RETRY
+    ========================================================= */
+
+    retryQuizButton?.addEventListener(
+      "click",
+      function () {
+
+        quizResult.style.display =
+          "none";
+
+        startQuiz();
+
+      }
+    );
+
+
+    /* =========================================================
+       SHUFFLE
+    ========================================================= */
+
+    function shuffleArray(array) {
+
+      for (
+        let i = array.length - 1;
+        i > 0;
+        i--
+      ) {
+
+        const j =
+          Math.floor(
+            Math.random() * (i + 1)
+          );
+
+        [
+          array[i],
+          array[j]
+        ] = [
+            array[j],
+            array[i]
+          ];
+
+      }
+
+      return array;
+
+    }
+
+
+    /* =========================================================
+       ESCAPE
+    ========================================================= */
+    function escapeQuizHTML(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    /* =========================================================
+       ERROR
+    ========================================================= */
 
     function showError() {
 
-      viewerCategory.style.display =
-        "none";
+      const viewer =
+        document.getElementById(
+          "pdfViewer"
+        );
 
-      viewerTitle.textContent =
-        "Note not found";
+      const error =
+        document.getElementById(
+          "viewerError"
+        );
 
-      viewerDescription.textContent =
-        "";
+      if (viewer) {
+        viewer.style.display =
+          "none";
+      }
 
-      pdfViewer.style.display =
-        "none";
-
-      viewerError.style.display =
-        "block";
+      if (error) {
+        error.style.display =
+          "block";
+      }
 
     }
 
 
+    /* =========================================================
+       START
+    ========================================================= */
+
     loadNote();
+
+    const headerStartQuizButton = document.getElementById(
+      "headerStartQuizButton"
+    );
+
+    if (headerStartQuizButton) {
+      headerStartQuizButton.addEventListener("click", () => {
+        if (!noteId) return;
+        window.location.href = "quiz.html?note_id=" + encodeURIComponent(noteId);
+      });
+    }
+
+    const headerPracticeButton = document.getElementById("headerPracticeButton");
+    if (headerPracticeButton) {
+      headerPracticeButton.addEventListener("click", () => {
+        if (!noteId) return;
+        window.location.href = "practice.html?note_id=" + encodeURIComponent(noteId);
+      });
+    }
+
 
   </script>
 
